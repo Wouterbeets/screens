@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"strings"
 
 	"github.com/wouterbeets/cyclist"
 )
@@ -50,7 +51,9 @@ func main() {
 		os.Exit(1)
 	}
 
-	comm = exec.Command(cmd)
+	cmdArgs := strings.Split(cmd, " ")
+
+	comm = exec.Command(cmdArgs[0], cmdArgs[1:]...)
 	err = comm.Run()
 	if err != nil {
 		fmt.Println(err)
